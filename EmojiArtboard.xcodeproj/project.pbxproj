@@ -15,6 +15,7 @@
 		79946EAE29773F94004B2D03 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79946EAD29773F94004B2D03 /* Emoji.swift */; };
 		79946EB029773FE3004B2D03 /* EmojiArtboard.Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79946EAF29773FE3004B2D03 /* EmojiArtboard.Background.swift */; };
 		79946EB32977481B004B2D03 /* EmojiArtboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79946EB22977481B004B2D03 /* EmojiArtboardViewModel.swift */; };
+		79946EB629774BF6004B2D03 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79946EB529774BF6004B2D03 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		79946EAD29773F94004B2D03 /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		79946EAF29773FE3004B2D03 /* EmojiArtboard.Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtboard.Background.swift; sourceTree = "<group>"; };
 		79946EB22977481B004B2D03 /* EmojiArtboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtboardViewModel.swift; sourceTree = "<group>"; };
+		79946EB529774BF6004B2D03 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 			children = (
 				798D6D7E297692A700EC8A52 /* EmojiArtboardApp.swift */,
 				798D6D80297692A700EC8A52 /* ContentView.swift */,
+				79946EB429774BE3004B2D03 /* Utils */,
 				79946EB1297747E7004B2D03 /* ViewModels */,
 				798D6D82297692A900EC8A52 /* Assets.xcassets */,
 				79946EAB29773F71004B2D03 /* Data */,
@@ -109,6 +112,14 @@
 				79946EB22977481B004B2D03 /* EmojiArtboardViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		79946EB429774BE3004B2D03 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				79946EB529774BF6004B2D03 /* Extensions.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,6 +198,7 @@
 				79946EAE29773F94004B2D03 /* Emoji.swift in Sources */,
 				798D6D7F297692A700EC8A52 /* EmojiArtboardApp.swift in Sources */,
 				79946EB029773FE3004B2D03 /* EmojiArtboard.Background.swift in Sources */,
+				79946EB629774BF6004B2D03 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
