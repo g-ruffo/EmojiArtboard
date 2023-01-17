@@ -11,6 +11,9 @@
 		798D6D81297692A700EC8A52 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798D6D80297692A700EC8A52 /* ContentView.swift */; };
 		798D6D83297692A900EC8A52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 798D6D82297692A900EC8A52 /* Assets.xcassets */; };
 		798D6D86297692A900EC8A52 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 798D6D85297692A900EC8A52 /* Preview Assets.xcassets */; };
+		79946EAA29773F26004B2D03 /* EmojiArtboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79946EA929773F26004B2D03 /* EmojiArtboard.swift */; };
+		79946EAE29773F94004B2D03 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79946EAD29773F94004B2D03 /* Emoji.swift */; };
+		79946EB029773FE3004B2D03 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79946EAF29773FE3004B2D03 /* Background.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +22,9 @@
 		798D6D80297692A700EC8A52 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		798D6D82297692A900EC8A52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		798D6D85297692A900EC8A52 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		79946EA929773F26004B2D03 /* EmojiArtboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtboard.swift; sourceTree = "<group>"; };
+		79946EAD29773F94004B2D03 /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
+		79946EAF29773FE3004B2D03 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +60,8 @@
 				798D6D7E297692A700EC8A52 /* EmojiArtboardApp.swift */,
 				798D6D80297692A700EC8A52 /* ContentView.swift */,
 				798D6D82297692A900EC8A52 /* Assets.xcassets */,
+				79946EAB29773F71004B2D03 /* Data */,
+				79946EA829773F00004B2D03 /* Model */,
 				798D6D84297692A900EC8A52 /* Preview Content */,
 			);
 			path = EmojiArtboard;
@@ -65,6 +73,31 @@
 				798D6D85297692A900EC8A52 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		79946EA829773F00004B2D03 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				79946EA929773F26004B2D03 /* EmojiArtboard.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		79946EAB29773F71004B2D03 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				79946EAF29773FE3004B2D03 /* Background.swift */,
+				79946EAC29773F7F004B2D03 /* Objects */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		79946EAC29773F7F004B2D03 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				79946EAD29773F94004B2D03 /* Emoji.swift */,
+			);
+			path = Objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +171,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				798D6D81297692A700EC8A52 /* ContentView.swift in Sources */,
+				79946EAA29773F26004B2D03 /* EmojiArtboard.swift in Sources */,
+				79946EAE29773F94004B2D03 /* Emoji.swift in Sources */,
 				798D6D7F297692A700EC8A52 /* EmojiArtboardApp.swift in Sources */,
+				79946EB029773FE3004B2D03 /* Background.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,7 +231,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -249,7 +285,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -275,6 +311,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,6 +341,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
