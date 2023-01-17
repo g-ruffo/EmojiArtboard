@@ -61,8 +61,8 @@
 		798D6D7D297692A700EC8A52 /* EmojiArtboard */ = {
 			isa = PBXGroup;
 			children = (
+				79946EB729774E16004B2D03 /* Views */,
 				798D6D7E297692A700EC8A52 /* EmojiArtboardApp.swift */,
-				798D6D80297692A700EC8A52 /* EmojiArtboardView.swift */,
 				79946EB429774BE3004B2D03 /* Utils */,
 				79946EB1297747E7004B2D03 /* ViewModels */,
 				798D6D82297692A900EC8A52 /* Assets.xcassets */,
@@ -120,6 +120,14 @@
 				79946EB529774BF6004B2D03 /* Extensions.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		79946EB729774E16004B2D03 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				798D6D80297692A700EC8A52 /* EmojiArtboardView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

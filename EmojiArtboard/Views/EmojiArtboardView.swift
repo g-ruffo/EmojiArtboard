@@ -8,19 +8,15 @@
 import SwiftUI
 
 struct EmojiArtboardView: View {
+    @ObservedObject var viewModel: EmojiArtboardViewModel
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
-        .padding()
+
     }
 }
 
 struct EmojiArtboardView_Previews: PreviewProvider {
     static var previews: some View {
-        EmojiArtboardView()
+        EmojiArtboardView(viewModel: EmojiArtboardViewModel())
     }
 }
