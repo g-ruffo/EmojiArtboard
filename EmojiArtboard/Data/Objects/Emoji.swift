@@ -8,14 +8,14 @@
 import Foundation
 
 
-struct Emoji: Identifiable {
+struct Emoji: Identifiable, Hashable {
     let text: String
-    var x: Int
-    var y: Int
+    var x: Int // Offset from the center
+    var y: Int // Offset from the center
     var size: Int
     let id: Int
 
-    fileprivate init(text: String, x: Int, y: Int, size: Int, id: Int) {
+    init(text: String, x: Int, y: Int, size: Int, id: Int) {
         self.text = text
         self.x = x
         self.y = y
