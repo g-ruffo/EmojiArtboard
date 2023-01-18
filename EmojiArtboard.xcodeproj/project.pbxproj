@@ -11,6 +11,7 @@
 		798D6D81297692A700EC8A52 /* EmojiArtboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798D6D80297692A700EC8A52 /* EmojiArtboardView.swift */; };
 		798D6D83297692A900EC8A52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 798D6D82297692A900EC8A52 /* Assets.xcassets */; };
 		798D6D86297692A900EC8A52 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 798D6D85297692A900EC8A52 /* Preview Assets.xcassets */; };
+		7990906529779E62004D35C5 /* UtilityViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7990906429779E62004D35C5 /* UtilityViews.swift */; };
 		79946EAA29773F26004B2D03 /* EmojiArtboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79946EA929773F26004B2D03 /* EmojiArtboardModel.swift */; };
 		79946EAE29773F94004B2D03 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79946EAD29773F94004B2D03 /* Emoji.swift */; };
 		79946EB029773FE3004B2D03 /* EmojiArtboard.Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79946EAF29773FE3004B2D03 /* EmojiArtboard.Background.swift */; };
@@ -24,6 +25,7 @@
 		798D6D80297692A700EC8A52 /* EmojiArtboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtboardView.swift; sourceTree = "<group>"; };
 		798D6D82297692A900EC8A52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		798D6D85297692A900EC8A52 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7990906429779E62004D35C5 /* UtilityViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityViews.swift; sourceTree = "<group>"; };
 		79946EA929773F26004B2D03 /* EmojiArtboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtboardModel.swift; sourceTree = "<group>"; };
 		79946EAD29773F94004B2D03 /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		79946EAF29773FE3004B2D03 /* EmojiArtboard.Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtboard.Background.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 		79946EB429774BE3004B2D03 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				7990906429779E62004D35C5 /* UtilityViews.swift */,
 				79946EB529774BF6004B2D03 /* Extensions.swift */,
 			);
 			path = Utils;
@@ -207,6 +210,7 @@
 				798D6D7F297692A700EC8A52 /* EmojiArtboardApp.swift in Sources */,
 				79946EB029773FE3004B2D03 /* EmojiArtboard.Background.swift in Sources */,
 				79946EB629774BF6004B2D03 /* Extensions.swift in Sources */,
+				7990906529779E62004D35C5 /* UtilityViews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
