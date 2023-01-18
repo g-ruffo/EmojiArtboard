@@ -19,6 +19,16 @@ extension CGRect {
     }
 }
 
+extension Character {
+    var isEmoji: Bool {
+        if let firstScalar = unicodeScalars.first, firstScalar.properties.isEmoji {
+            return (firstScalar.value >= 0x238d || unicodeScalars.count > 1)
+        } else {
+            return false
+        }
+    }
+}
+
 extension Array where Element == NSItemProvider {
     func loadObjects<T>(ofType theType: T.Type, firstOnly: Bool = false, using load: @escaping (T) -> Void) -> Bool where T: NSItemProviderReading {
         if let provider = first(where: { $0.canLoadObject(ofClass: theType)}) {
