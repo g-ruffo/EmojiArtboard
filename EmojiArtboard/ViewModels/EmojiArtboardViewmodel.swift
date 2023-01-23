@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 class EmojiArtboardViewModel: ObservableObject {
     
     @Published private(set) var emojiArtboard: EmojiArtboardModel {
@@ -19,6 +18,7 @@ class EmojiArtboardViewModel: ObservableObject {
     }
     
     @Published var backgroundImage: UIImage?
+    @Published var backgroundImageFetchStatus = BackgroundImageFetchStatus.idle
     
     init() {
         emojiArtboard = EmojiArtboardModel()
@@ -36,10 +36,12 @@ class EmojiArtboardViewModel: ObservableObject {
         switch emojiArtboard.background {
         case .url(let url):
             // Fetch the url
+            backgroundImageFetchStatus = .fetching
             DispatchQueue.global(qos: .userInitiated).async {
             let imageData = try? Data(contentsOf: url)
                 DispatchQueue.main.async { [weak self] in
                     if self?.emojiArtboard.background == EmojiArtboardModel.Background.url(url) {
+                        self?.backgroundImageFetchStatus = .idle
                         if imageData != nil {
                             self?.backgroundImage = UIImage(data: imageData!)
                         }

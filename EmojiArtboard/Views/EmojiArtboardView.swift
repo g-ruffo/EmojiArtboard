@@ -27,12 +27,17 @@ struct EmojiArtboardView: View {
                     OptionalImage(uiImage: viewModel.backgroundImage)
                         .position(convertFromEmojiCoordinates((x: 0, y: 0), in: geometry))
                 )
-                ForEach(viewModel.emojis) { emoji in
-                    Text(emoji.text)
-                        .font(.system(size: fontSize(for: emoji)))
-                        .position(position(for: emoji, in: geometry))
+                if viewModel.backgroundImageFetchStatus == .fetching {
+                    ProgressView()
+                        .scaleEffect(2)
+                        .progressViewStyle(CircularProgressViewStyle(tint: Color.orange))
+                } else {
+                    ForEach(viewModel.emojis) { emoji in
+                        Text(emoji.text)
+                            .font(.system(size: fontSize(for: emoji)))
+                            .position(position(for: emoji, in: geometry))
+                    }
                 }
-                
             }
             .onDrop(of: [.plainText, .url, .image], isTargeted: nil) { providers, location in
                 drop(providers: providers, at: location, in: geometry)
