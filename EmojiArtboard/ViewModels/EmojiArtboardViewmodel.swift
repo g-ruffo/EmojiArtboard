@@ -7,9 +7,18 @@
 
 import SwiftUI
 
+
 class EmojiArtboardViewModel: ObservableObject {
     
-    @Published private(set) var emojiArtboard: EmojiArtboardModel
+    @Published private(set) var emojiArtboard: EmojiArtboardModel {
+        didSet {
+            if emojiArtboard.background != oldValue.background {
+                fetchBackgroundImageDataIfNecessary()
+            }
+        }
+    }
+    
+    @Published var backgroundImage: UIImage?
     
     init() {
         emojiArtboard = EmojiArtboardModel()
@@ -22,8 +31,30 @@ class EmojiArtboardViewModel: ObservableObject {
     
     // MARK: - Intents(s)
     
+    private func fetchBackgroundImageDataIfNecessary() {
+        backgroundImage = nil
+        switch emojiArtboard.background {
+        case .url(let url):
+            // Fetch the url
+            DispatchQueue.global(qos: .userInitiated).async {
+            let imageData = try? Data(contentsOf: url)
+                DispatchQueue.main.async { [weak self] in
+                    if self?.emojiArtboard.background == EmojiArtboardModel.Background.url(url) {
+                        if imageData != nil {
+                            self?.backgroundImage = UIImage(data: imageData!)
+                        }
+                    }
+                }
+            }
+            case .imageData(let data): backgroundImage = UIImage(data: data)
+            case .blank: break
+                
+        }
+    }
+    
     func setBackgorund(_ background: EmojiArtboardModel.Background) {
         emojiArtboard.background = background
+        print("background set to \(background)")
     }
     
     func addEmoji(_ emoji: String, at location: (x: Int, y: Int), size: CGFloat) {
