@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7980A1B0297F18AD0058D521 /* BackgroundImageFetchStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7980A1AF297F18AD0058D521 /* BackgroundImageFetchStatus.swift */; };
 		798D6D7F297692A700EC8A52 /* EmojiArtboardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798D6D7E297692A700EC8A52 /* EmojiArtboardApp.swift */; };
 		798D6D81297692A700EC8A52 /* EmojiArtboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798D6D80297692A700EC8A52 /* EmojiArtboardView.swift */; };
 		798D6D83297692A900EC8A52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 798D6D82297692A900EC8A52 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7980A1AF297F18AD0058D521 /* BackgroundImageFetchStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundImageFetchStatus.swift; sourceTree = "<group>"; };
 		798D6D7B297692A700EC8A52 /* EmojiArtboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiArtboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		798D6D7E297692A700EC8A52 /* EmojiArtboardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtboardApp.swift; sourceTree = "<group>"; };
 		798D6D80297692A700EC8A52 /* EmojiArtboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtboardView.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			children = (
 				79946EAF29773FE3004B2D03 /* EmojiArtboard.Background.swift */,
 				79946EAC29773F7F004B2D03 /* Objects */,
+				7980A1AF297F18AD0058D521 /* BackgroundImageFetchStatus.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 				798D6D7F297692A700EC8A52 /* EmojiArtboardApp.swift in Sources */,
 				79946EB029773FE3004B2D03 /* EmojiArtboard.Background.swift in Sources */,
 				79946EB629774BF6004B2D03 /* Extensions.swift in Sources */,
+				7980A1B0297F18AD0058D521 /* BackgroundImageFetchStatus.swift in Sources */,
 				7990906529779E62004D35C5 /* UtilityViews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
