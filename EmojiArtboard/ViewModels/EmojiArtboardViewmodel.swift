@@ -22,6 +22,7 @@ class EmojiArtboardViewModel: ObservableObject {
     
     init() {
         emojiArtboard = EmojiArtboardModel()
+        setBackground(.url(URL(string: "https://blog.hootsuite.com/wp-content/uploads/2020/02/Image-copyright.png")!))
     }
     
     var emojis: [Emoji] { emojiArtboard.emojis}
@@ -54,7 +55,7 @@ class EmojiArtboardViewModel: ObservableObject {
         }
     }
     
-    func setBackgorund(_ background: EmojiArtboardModel.Background) {
+    func setBackground(_ background: EmojiArtboardModel.Background) {
         emojiArtboard.background = background
         print("background set to \(background)")
     }
