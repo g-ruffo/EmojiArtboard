@@ -88,8 +88,11 @@ struct EmojiArtboardView: View {
     }
     
     private func position(for emoji: Emoji, in geometry: GeometryProxy) -> CGPoint {
-        convertFromEmojiCoordinates((x: emoji.x, y: emoji.y), in: geometry)
-    }
+        if selectedEmojis.contains(emoji) {
+            return convertFromEmojiCoordinates((emoji.x + Int(gestureEmojiPanOffset.width), emoji.y + Int(gestureEmojiPanOffset.height)), in: geometry)
+        } else {
+            return convertFromEmojiCoordinates((emoji.x, emoji.y), in: geometry)
+        }    }
     
     private func convertToEmojiCoordinates(_ location: CGPoint, in geometry: GeometryProxy) -> (x: Int, y: Int) {
         let center = geometry.frame(in: .local).center
@@ -162,14 +165,14 @@ struct EmojiArtboardView: View {
                 
             }
             .onEnded { gestureScaleAtEnd in
-                       if selectedEmojis.isEmpty {
-                           steadyStateZoomScale *= gestureScaleAtEnd
-                       } else {
-                           for emoji in selectedEmojis {
-                               viewModel.scaleEmoji(emoji, by: gestureScaleAtEnd)
-                           }
-                       }
-                   }
+                if selectedEmojis.isEmpty {
+                    steadyStateZoomScale *= gestureScaleAtEnd
+                } else {
+                    for emoji in selectedEmojis {
+                        viewModel.scaleEmoji(emoji, by: gestureScaleAtEnd)
+                    }
+                }
+            }
     }
     
     private func doubleTapToZoom(in size: CGSize) -> some Gesture {
