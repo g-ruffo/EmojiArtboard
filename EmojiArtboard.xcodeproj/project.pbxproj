@@ -18,6 +18,7 @@
 		79946EB029773FE3004B2D03 /* EmojiArtboard.Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79946EAF29773FE3004B2D03 /* EmojiArtboard.Background.swift */; };
 		79946EB32977481B004B2D03 /* EmojiArtboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79946EB22977481B004B2D03 /* EmojiArtboardViewModel.swift */; };
 		79946EB629774BF6004B2D03 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79946EB529774BF6004B2D03 /* Extensions.swift */; };
+		79B2A340297F794000093838 /* SelectionEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B2A33F297F794000093838 /* SelectionEffect.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		79946EAF29773FE3004B2D03 /* EmojiArtboard.Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtboard.Background.swift; sourceTree = "<group>"; };
 		79946EB22977481B004B2D03 /* EmojiArtboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtboardViewModel.swift; sourceTree = "<group>"; };
 		79946EB529774BF6004B2D03 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		79B2A33F297F794000093838 /* SelectionEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionEffect.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 			children = (
 				7990906429779E62004D35C5 /* UtilityViews.swift */,
 				79946EB529774BF6004B2D03 /* Extensions.swift */,
+				79B2A33F297F794000093838 /* SelectionEffect.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 				79946EB32977481B004B2D03 /* EmojiArtboardViewModel.swift in Sources */,
 				79946EAE29773F94004B2D03 /* Emoji.swift in Sources */,
 				798D6D7F297692A700EC8A52 /* EmojiArtboardApp.swift in Sources */,
+				79B2A340297F794000093838 /* SelectionEffect.swift in Sources */,
 				79946EB029773FE3004B2D03 /* EmojiArtboard.Background.swift in Sources */,
 				79946EB629774BF6004B2D03 /* Extensions.swift in Sources */,
 				7980A1B0297F18AD0058D521 /* BackgroundImageFetchStatus.swift in Sources */,
@@ -271,7 +275,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -325,7 +329,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -351,7 +355,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -381,7 +385,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
