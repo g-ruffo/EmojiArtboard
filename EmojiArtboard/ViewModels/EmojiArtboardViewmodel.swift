@@ -77,4 +77,10 @@ class EmojiArtboardViewModel: ObservableObject {
             emojiArtboard.emojis[index].size = Int((CGFloat(emojiArtboard.emojis[index].size) * scale).rounded(.toNearestOrAwayFromZero))
         }
     }
+    
+    func removeEmoji(_ emoji: Emoji) {
+        if let index = emojiArtboard.emojis.index(matching: emoji) {
+            emojiArtboard.emojis.remove(at: index)
+        }
+    }
 }
