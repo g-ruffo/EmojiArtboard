@@ -5,7 +5,7 @@
 //  Created by Grayson Ruffo on 2023-01-17.
 //
 
-import Foundation
+import SwiftUI
 
 extension Collection where Element: Identifiable {
     func index(matching element: Element) -> Self.Index? {
@@ -97,5 +97,70 @@ extension CGSize {
     static func /(lhs: Self, rhs: CGFloat) -> CGSize {
         CGSize(width: lhs.width / rhs, height: lhs.height / rhs)
     }
+}
+
+extension CGPoint {
+    static func -(lhs: Self, rhs: Self) -> CGSize {
+        CGSize(width: lhs.x - rhs.x, height: lhs.y - rhs.y)
+    }
+    static func +(lhs: Self, rhs: CGSize) -> CGPoint {
+        CGPoint(x: lhs.x + rhs.width, y: lhs.y + rhs.height)
+    }
+    static func -(lhs: Self, rhs: CGSize) -> CGPoint {
+        CGPoint(x: lhs.x - rhs.width, y: lhs.y - rhs.height)
+    }
+    static func *(lhs: Self, rhs: CGFloat) -> CGPoint {
+        CGPoint(x: lhs.x * rhs, y: lhs.y * rhs)
+    }
+    static func /(lhs: Self, rhs: CGFloat) -> CGPoint {
+        CGPoint(x: lhs.x / rhs, y: lhs.y / rhs)
+    }
+}
+
+extension RangeReplaceableCollection where Element: Identifiable {
+    mutating func remove(_ element: Element) {
+        if let index = index(matching: element) {
+            remove(at: index)
+        }
+    }
+
+    subscript(_ element: Element) -> Element {
+        get {
+            if let index = index(matching: element) {
+                return self[index]
+            } else {
+                return element
+            }
+        }
+        set {
+            if let index = index(matching: element) {
+                replaceSubrange(index...index, with: [newValue])
+            }
+        }
+    }
+}
+
+extension Set where Element: Identifiable {
+    mutating func toggleMembership(of element: Element) {
+        if let index = index(matching: element) {
+            remove(at: index)
+        } else {
+            insert(element)
+        }
+    }
+}
+
+extension Set where Element == Int {
+    mutating func toggleMembership(of element: Element) {
+        if self.contains(element) {
+            remove(element)
+        } else {
+            insert(element)
+        }
+    }
+}
+
+extension DragGesture.Value {
+    var distance: CGSize { location - startLocation }
 }
 
