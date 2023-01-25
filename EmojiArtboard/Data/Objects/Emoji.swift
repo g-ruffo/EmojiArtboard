@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct Emoji: Identifiable, Hashable {
+struct Emoji: Identifiable, Hashable, Codable {
     let text: String
     var x: Int // Offset from the center
     var y: Int // Offset from the center
