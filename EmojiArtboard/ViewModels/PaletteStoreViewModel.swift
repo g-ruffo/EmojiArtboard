@@ -10,10 +10,49 @@ import SwiftUI
 class PaletteStoreViewModel: ObservableObject {
     let name: String
     
-    @Published var palettes = [Palette]()
+    @Published var palettes = [Palette]() {
+        didSet {
+            storeInUserDefaults()
+        }
+    }
     
     init(named name: String) {
         self.name = name
+        restoreInUserDefaults()
+        if palettes.isEmpty {
+            print("Using built-in palettes")
+            insertPalette(named: "1", emojies: "😀😃😄😁😆😅😂🤣🥲🥹☺️😊😇🙂🙃😉😌😍")
+            insertPalette(named: "2", emojies: "😀😃😄😁😆😅😂🤣🥲🥹☺️😊😇🙂🙃😉😌😍")
+            insertPalette(named: "3", emojies: "😀😃😄😁😆😅😂🤣🥲🥹☺️😊😇🙂🙃😉😌😍")
+            insertPalette(named: "4", emojies: "😀😃😄😁😆😅😂🤣🥲🥹☺️😊😇🙂🙃😉😌😍")
+
+        } else {
+            print("Successfully loaded palettes from UserDefaults: \(palettes)")
+        }
+    }
+    
+    private var userDefaultsKey: String {
+        "PaletteStore:" + name
+    }
+    
+    private func storeInUserDefaults() {
+//        UserDefaults.standard.set(palettes.map { [$0.name, $0.emojis, String($0.id) ] }, forKey: userDefaultsKey)
+        UserDefaults.standard.set(try? JSONEncoder().encode(palettes), forKey: userDefaultsKey)
+    }
+    
+    private func restoreInUserDefaults() {
+        if let jsonData = UserDefaults.standard.data(forKey: userDefaultsKey),
+        let decodedPalettes = try? JSONDecoder().decode(Array<Palette>.self, from: jsonData) {
+            palettes = decodedPalettes
+        }
+//        if let palettesAsPropertyList = UserDefaults.standard.array(forKey: userDefaultsKey) as? [[String]] {
+//            for paletteAsArray in palettesAsPropertyList {
+//                if paletteAsArray.count == 3, let id = Int(paletteAsArray[2]), !palettes.contains(where: { $0.id == id }) {
+//                    let palette = Palette(name: paletteAsArray[0], emojis: paletteAsArray[1], id: id)
+//                    palettes.append(palette)
+//                }
+//            }
+//        }
     }
     
     // MARK: - Intent
@@ -23,7 +62,7 @@ class PaletteStoreViewModel: ObservableObject {
         return palettes[safeIndex]
     }
     
-    @discardableResult
+//    @discardableResult
     func removePalette(at index: Int) -> Int {
         if palettes.count > 1 && palettes.indices.contains(index) {
             palettes.remove(at: index)
