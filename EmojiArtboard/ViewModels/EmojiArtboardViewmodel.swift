@@ -11,6 +11,7 @@ class EmojiArtboardViewModel: ObservableObject {
     
     @Published private(set) var emojiArtboard: EmojiArtboardModel {
         didSet {
+            autosave()
             if emojiArtboard.background != oldValue.background {
                 fetchBackgroundImageDataIfNecessary()
             }
@@ -20,6 +21,35 @@ class EmojiArtboardViewModel: ObservableObject {
     @Published var backgroundImage: UIImage?
     @Published var backgroundImageFetchStatus = BackgroundImageFetchStatus.idle
     
+    private struct Autosave {
+        static let filename = "Autosaved.emojiArtboad"
+        static var url: URL? {
+            let documentDirectory = FileManager.default.urls(for: documentDirectory, in: .userDomainMask).first
+            return documentDirectory?.appendingPathComponent(filename)
+        }
+    }
+    
+    private func autosave() {
+        if let url = Autosave.url {
+            save(to: url)
+        }
+    }
+    
+    private func save(to url: URL) {
+        let thisFunction = "\(String(describing: self)).\(#function)"
+        do {
+            let data: Data = try emojiArtboard.json()
+            print("\(thisFunction) JSON = \(String(data: data, encoding: .utf8) ?? "nil")")
+            try data.write(to: url)
+            print("\(thisFunction) success!")
+        } catch let encodingError where encodingError is EncodingError {
+            print("\(thisFunction) couldn't encode EmojiArtboard as JSON because = \(encodingError.localizedDescription)")
+
+        } catch let error {
+            print("\(thisFunction) error = \(error)")
+        }
+    }
+    
     init() {
         emojiArtboard = EmojiArtboardModel()
         setBackground(.url(URL(string: "https://blog.hootsuite.com/wp-content/uploads/2020/02/Image-copyright.png")!))
@@ -27,7 +57,7 @@ class EmojiArtboardViewModel: ObservableObject {
     
     var emojis: [Emoji] { emojiArtboard.emojis}
     var background: EmojiArtboardModel.Background { emojiArtboard.background}
-
+    
     
     
     // MARK: - Intents(s)
@@ -39,7 +69,7 @@ class EmojiArtboardViewModel: ObservableObject {
             // Fetch the url
             backgroundImageFetchStatus = .fetching
             DispatchQueue.global(qos: .userInitiated).async {
-            let imageData = try? Data(contentsOf: url)
+                let imageData = try? Data(contentsOf: url)
                 DispatchQueue.main.async { [weak self] in
                     if self?.emojiArtboard.background == EmojiArtboardModel.Background.url(url) {
                         self?.backgroundImageFetchStatus = .idle
@@ -49,9 +79,9 @@ class EmojiArtboardViewModel: ObservableObject {
                     }
                 }
             }
-            case .imageData(let data): backgroundImage = UIImage(data: data)
-            case .blank: break
-                
+        case .imageData(let data): backgroundImage = UIImage(data: data)
+        case .blank: break
+            
         }
     }
     
@@ -68,7 +98,7 @@ class EmojiArtboardViewModel: ObservableObject {
         if let index = emojiArtboard.emojis.index(matching: emoji) {
             emojiArtboard.emojis[index].x += Int(offset.width)
             emojiArtboard.emojis[index].y += Int(offset.height)
-
+            
         }
     }
     

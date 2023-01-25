@@ -7,11 +7,15 @@
 
 import Foundation
 
-struct EmojiArtboardModel {
+struct EmojiArtboardModel: Codable {
     var background = Background.blank
     var emojis = [Emoji]()
     
     private var uniqueEmojiId = 0
+    
+    func json() throws -> Data {
+        return try JSONEncoder().encode(self)
+    }
     
     init() { }
     
