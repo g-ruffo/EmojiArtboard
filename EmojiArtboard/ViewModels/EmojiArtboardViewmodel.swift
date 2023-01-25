@@ -22,9 +22,9 @@ class EmojiArtboardViewModel: ObservableObject {
     @Published var backgroundImageFetchStatus = BackgroundImageFetchStatus.idle
     
     private struct Autosave {
-        static let filename = "Autosaved.emojiArtboad"
+        static let filename = "Autosaved.emojiArtboard"
         static var url: URL? {
-            let documentDirectory = FileManager.default.urls(for: documentDirectory, in: .userDomainMask).first
+            let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
             return documentDirectory?.appendingPathComponent(filename)
         }
     }
@@ -51,8 +51,13 @@ class EmojiArtboardViewModel: ObservableObject {
     }
     
     init() {
-        emojiArtboard = EmojiArtboardModel()
-        setBackground(.url(URL(string: "https://blog.hootsuite.com/wp-content/uploads/2020/02/Image-copyright.png")!))
+        if let url = Autosave.url, let autosavedEmojiArtboard = try? EmojiArtboardModel(url: url) {
+            emojiArtboard = autosavedEmojiArtboard
+            fetchBackgroundImageDataIfNecessary()
+        } else {
+            emojiArtboard = EmojiArtboardModel()
+            setBackground(.url(URL(string: "https://blog.hootsuite.com/wp-content/uploads/2020/02/Image-copyright.png")!))
+        }
     }
     
     var emojis: [Emoji] { emojiArtboard.emojis}
