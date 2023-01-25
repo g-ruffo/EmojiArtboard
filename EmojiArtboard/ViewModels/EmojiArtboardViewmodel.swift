@@ -11,7 +11,7 @@ class EmojiArtboardViewModel: ObservableObject {
     
     @Published private(set) var emojiArtboard: EmojiArtboardModel {
         didSet {
-            autosave()
+            scheduleAutosave()
             if emojiArtboard.background != oldValue.background {
                 fetchBackgroundImageDataIfNecessary()
             }
@@ -21,7 +21,17 @@ class EmojiArtboardViewModel: ObservableObject {
     @Published var backgroundImage: UIImage?
     @Published var backgroundImageFetchStatus = BackgroundImageFetchStatus.idle
     
+    private var autosaveTimer: Timer?
+    
+    private func scheduleAutosave() {
+        autosaveTimer?.invalidate()
+        autosaveTimer = Timer.scheduledTimer(withTimeInterval: Autosave.coalescingInterval, repeats: false) { _ in
+            self.autosave()
+        }
+    }
+    
     private struct Autosave {
+        static let coalescingInterval = 5.0
         static let filename = "Autosaved.emojiArtboard"
         static var url: URL? {
             let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
