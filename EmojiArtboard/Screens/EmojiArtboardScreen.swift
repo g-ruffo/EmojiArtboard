@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EmojiArtboardView: View {
+struct EmojiArtboardScreen: View {
     @ObservedObject var viewModel: EmojiArtboardViewModel
     
     let defaultEmojiFontSize: CGFloat = 40
@@ -246,33 +246,11 @@ struct EmojiArtboardView: View {
                 }
             }
     }
-    
-    var palette: some View {
-        ScrollingEmojisView(emojis: testEmojis)
-            .font(.system(size: defaultEmojiFontSize))
-    }
-    
-    
-    let testEmojis = "😀😃😄😁😆😅😂🤣🥲🥹☺️😊😇🙂🙃😉😌😍"
-    
-    struct ScrollingEmojisView: View {
-        let emojis: String
-        
-        var body: some View {
-            ScrollView(.horizontal) {
-                HStack {
-                    ForEach(emojis.map { String($0) }, id: \.self) { emoji in
-                        Text(emoji)
-                            .onDrag { NSItemProvider(object: emoji as NSString) }
-                    }
-                }
-            }
-        }
-    }
 }
+    
 
 struct EmojiArtboardView_Previews: PreviewProvider {
     static var previews: some View {
-        EmojiArtboardView(viewModel: EmojiArtboardViewModel())
+        EmojiArtboardScreen(viewModel: EmojiArtboardViewModel())
     }
 }

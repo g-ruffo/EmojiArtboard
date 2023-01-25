@@ -13,7 +13,7 @@ struct EmojiArtboardApp: App {
     let paletteStoreViewModel = PaletteStoreViewModel(named: "Default")
     var body: some Scene {
         WindowGroup {
-            EmojiArtboardView(viewModel: emojiArtboardViewModel)
+            EmojiArtboardScreen(viewModel: emojiArtboardViewModel)
         }
     }
 }
