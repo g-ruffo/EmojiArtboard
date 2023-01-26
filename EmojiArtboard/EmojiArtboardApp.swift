@@ -9,11 +9,12 @@ import SwiftUI
 
 @main
 struct EmojiArtboardApp: App {
-    let emojiArtboardViewModel = EmojiArtboardViewModel()
-    let paletteStoreViewModel = PaletteStoreViewModel(named: "Default")
+    @StateObject var emojiArtboardViewModel = EmojiArtboardViewModel()
+    @StateObject var paletteStoreViewModel = PaletteStoreViewModel(named: "Default")
     var body: some Scene {
         WindowGroup {
             EmojiArtboardScreen(viewModel: emojiArtboardViewModel)
+                .environmentObject(paletteStoreViewModel)
         }
     }
 }
