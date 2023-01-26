@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		792DC6F8298208210097D232 /* PaletteEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792DC6F7298208210097D232 /* PaletteEditorView.swift */; };
 		7980A1B0297F18AD0058D521 /* BackgroundImageFetchStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7980A1AF297F18AD0058D521 /* BackgroundImageFetchStatus.swift */; };
 		7985B2542980D01000132538 /* PaletteStoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7985B2532980D01000132538 /* PaletteStoreViewModel.swift */; };
 		7985B2562980D06900132538 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7985B2552980D06900132538 /* Palette.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		792DC6F7298208210097D232 /* PaletteEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteEditorView.swift; sourceTree = "<group>"; };
 		7980A1AF297F18AD0058D521 /* BackgroundImageFetchStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundImageFetchStatus.swift; sourceTree = "<group>"; };
 		7985B2532980D01000132538 /* PaletteStoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteStoreViewModel.swift; sourceTree = "<group>"; };
 		7985B2552980D06900132538 /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				7995E8262981EFBF003264CC /* PaletteChooserView.swift */,
+				792DC6F7298208210097D232 /* PaletteEditorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				798D6D81297692A700EC8A52 /* EmojiArtboardScreen.swift in Sources */,
+				792DC6F8298208210097D232 /* PaletteEditorView.swift in Sources */,
 				79946EAA29773F26004B2D03 /* EmojiArtboardModel.swift in Sources */,
 				79946EB32977481B004B2D03 /* EmojiArtboardViewModel.swift in Sources */,
 				7985B2562980D06900132538 /* Palette.swift in Sources */,
