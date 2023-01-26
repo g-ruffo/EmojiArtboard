@@ -13,16 +13,46 @@ struct PaletteChooserView: View {
     
     @EnvironmentObject var viewModel: PaletteStoreViewModel
     
+    @State private var chosenPaletteIndex = 0
+    
     var body: some View {
-        let palette = viewModel.palette(at: 0)
+        HStack {
+            paletteControlButton
+            body(for: viewModel.palette(at: chosenPaletteIndex))
+        }
+    }
+    
+    var paletteControlButton: some View {
+        Button {
+            withAnimation {
+                chosenPaletteIndex = (chosenPaletteIndex + 1) % viewModel.palettes.count
+            }
+        } label: {
+            Image(systemName: "paintpalette")
+        }
+        .font(emojiFont)
+    }
+    
+    func body(for palette: Palette) -> some View {
         HStack {
             Text(palette.name)
             ScrollingEmojisView(emojis: palette.emojis)
                 .font(emojiFont)
         }
+        .id(palette.id)
+        .transition(rollTransition)
+        
     }
     
+    var rollTransition: AnyTransition {
+        AnyTransition.asymmetric(
+            insertion: .offset(x: 0, y: emojiFontSize),
+            removal: .offset(x: 0, y: -emojiFontSize)
+        )
+    }
     
+}
+
     struct ScrollingEmojisView: View {
         let emojis: String
         
@@ -37,7 +67,7 @@ struct PaletteChooserView: View {
             }
         }
     }
-}
+
 
 
 struct PaletteChooserScreen_Previews: PreviewProvider {
