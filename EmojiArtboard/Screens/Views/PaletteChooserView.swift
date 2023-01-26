@@ -8,17 +8,20 @@
 import SwiftUI
 
 struct PaletteChooserView: View {
+    var emojiFontSize: CGFloat = 40
+    var emojiFont: Font {.system(size: emojiFontSize)}
+    
+    @EnvironmentObject var viewModel: PaletteStoreViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        let palette = viewModel.palette(at: 0)
+        HStack {
+            Text(palette.name)
+            ScrollingEmojisView(emojis: palette.emojis)
+                .font(emojiFont)
+        }
     }
     
-    var palette: some View {
-        ScrollingEmojisView(emojis: testEmojis)
-            .font(.system(size: defaultEmojiFontSize))
-    }
-    
-    
-    let testEmojis = "😀😃😄😁😆😅😂🤣🥲🥹☺️😊😇🙂🙃😉😌😍"
     
     struct ScrollingEmojisView: View {
         let emojis: String
@@ -39,6 +42,6 @@ struct PaletteChooserView: View {
 
 struct PaletteChooserScreen_Previews: PreviewProvider {
     static var previews: some View {
-        PaletteChooserScreen()
+        PaletteChooserView()
     }
 }
