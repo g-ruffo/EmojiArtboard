@@ -20,6 +20,7 @@ struct PaletteChooserView: View {
             paletteControlButton
             body(for: viewModel.palette(at: chosenPaletteIndex))
         }
+        .clipped()
     }
     
     var paletteControlButton: some View {
@@ -31,6 +32,32 @@ struct PaletteChooserView: View {
             Image(systemName: "paintpalette")
         }
         .font(emojiFont)
+        .contextMenu { contextMenu }
+    }
+    
+    @ViewBuilder
+    var contextMenu: some View {
+        AnimatedActionButton(title: "New", systemImage: "plus") {
+            viewModel.insertPalette(named: "New", emojies: "", at: chosenPaletteIndex)
+        }
+        AnimatedActionButton(title: "Delete", systemImage: "minus.circle") {
+            chosenPaletteIndex = viewModel.removePalette(at: chosenPaletteIndex)
+        }
+        gotoMenu
+    }
+    
+    var gotoMenu: some View {
+        Menu {
+            ForEach(viewModel.palettes) { palette in
+                AnimatedActionButton(title: palette.name) {
+                    if let index = viewModel.palettes.index(matching: palette) {
+                        chosenPaletteIndex = index
+                    }
+                }
+            }
+        } label : {
+            Label("Go To", systemImage: "text.insert")
+        }
     }
     
     func body(for palette: Palette) -> some View {
@@ -72,6 +99,6 @@ struct PaletteChooserView: View {
 
 struct PaletteChooserScreen_Previews: PreviewProvider {
     static var previews: some View {
-        PaletteChooserView()
+        PaletteChooserView().environmentObject(PaletteStoreViewModel(named: "1"))
     }
 }
