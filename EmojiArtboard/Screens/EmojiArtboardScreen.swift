@@ -15,7 +15,7 @@ struct EmojiArtboardScreen: View {
     var body: some View {
         VStack(spacing: 0) {
             documentBody
-            palette
+            PaletteChooserView(emojiFontSize: defaultEmojiFontSize)
         }
     }
     
