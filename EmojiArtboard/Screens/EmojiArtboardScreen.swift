@@ -57,8 +57,30 @@ struct EmojiArtboardScreen: View {
             .alert("Delete", isPresented: $showDeleteAlert, presenting: deleteEmoji) { deleteEmoji in
                 deleteEmojiOnDemand(for: deleteEmoji)
             }
+            .alert(item: $alertToShow) { alertToShow in
+                // Return Alert
+                alertToShow.alert()
+            }
+            .onChange(of: viewModel.backgroundImageFetchStatus) { status in
+                switch status {
+                case .failed(let url):
+                    showBackgroundImageFetchAlert(url)
+                default: break
+                }
+            }
             
         }
+    }
+    
+    @State private var alertToShow: IdentifiableAlert?
+    
+    private func showBackgroundImageFetchAlert(_ url: URL) {
+        alertToShow = IdentifiableAlert(id: "Fetch failed: " + url.absoluteString, alert: {
+            Alert(title: Text("Background Image Fetch"),
+            message: Text("Couldn't load image from \(url)."),
+                  dismissButton: .default(Text("OK"))
+                  )
+        })
     }
     
     private func drop(providers: [NSItemProvider], at location: CGPoint, in geometry: GeometryProxy) -> Bool {

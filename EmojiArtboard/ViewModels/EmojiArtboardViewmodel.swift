@@ -91,6 +91,9 @@ class EmojiArtboardViewModel: ObservableObject {
                         if imageData != nil {
                             self?.backgroundImage = UIImage(data: imageData!)
                         }
+                        if self?.backgroundImage == nil {
+                            self?.backgroundImageFetchStatus = .failed(url)
+                        }
                     }
                 }
             }
