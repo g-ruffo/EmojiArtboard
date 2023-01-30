@@ -11,7 +11,7 @@
 			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>ca.veltus.ca.emojiartboard</string>
+				<string>ca.veltus.emojiartboard</string>
 			</array>
 		</dict>
 	</array>
@@ -28,7 +28,7 @@
 			<key>UTTypeIconFiles</key>
 			<array/>
 			<key>UTTypeIdentifier</key>
-			<string>ca.veltus.ca.emojiartboard</string>
+			<string>ca.veltus.emojiartboard</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -51,7 +51,7 @@
 			<key>UTTypeIconFiles</key>
 			<array/>
 			<key>UTTypeIdentifier</key>
-			<string>ca.veltus.ca.emojiartboard</string>
+			<string>ca.veltus.emojiartboard</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>

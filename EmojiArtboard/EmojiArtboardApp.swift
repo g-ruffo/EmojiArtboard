@@ -13,8 +13,8 @@ struct EmojiArtboardApp: App {
     @StateObject var paletteStoreViewModel = PaletteStoreViewModel(named: "Default")
     
     var body: some Scene {
-        WindowGroup {
-            EmojiArtboardScreen(viewModel: emojiArtboardViewModel)
+        DocumentGroup(newDocument: { EmojiArtboardViewModel() }) { config in
+            EmojiArtboardScreen(viewModel: config.document)
                 .environmentObject(paletteStoreViewModel)
         }
     }
