@@ -68,6 +68,9 @@ struct EmojiArtboardScreen: View {
                 default: break
                 }
             }
+            .onReceive(viewModel.$backgroundImage) { image in
+                zoomToFit(image, in: geometry.size)
+            }
             
         }
     }
