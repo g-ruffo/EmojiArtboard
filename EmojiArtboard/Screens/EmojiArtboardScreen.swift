@@ -76,7 +76,12 @@ struct EmojiArtboardScreen: View {
 
                 }
             }
-            
+            .toolbar {
+                UndoButton(
+                    undo: undoManager?.optionalUndoMenuItemTitle,
+                    redo: undoManager?.optionalUndoMenuItemTitle
+                )
+            }
         }
     }
     
