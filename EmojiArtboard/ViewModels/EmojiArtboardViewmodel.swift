@@ -7,12 +7,33 @@
 
 import SwiftUI
 import Combine
+import UniformTypeIdentifiers
 
-class EmojiArtboardViewModel: ObservableObject {
+class EmojiArtboardViewModel: ReferenceFileDocument {
     
+    static var readableContentTypes = [UTType.emojiartboard]
+    static var writeableContentTypes = [UTType.emojiartboard]
+
+    
+    required init(configuration: ReadConfiguration) throws {
+        if let data = configuration.file.regularFileContents {
+            emojiArtboard = try EmojiArtboardModel(json: data)
+            fetchBackgroundImageDataIfNecessary()
+        } else {
+            throw CocoaError(.fileReadCorruptFile)
+        }
+    }
+    
+    func snapshot(contentType: UTType) throws -> Data {
+        try emojiArtboard.json()
+    }
+    
+    func fileWrapper(snapshot: Data, configuration: WriteConfiguration) throws -> FileWrapper {
+        FileWrapper(regularFileWithContents: snapshot)
+    }
+        
     @Published private(set) var emojiArtboard: EmojiArtboardModel {
         didSet {
-            scheduleAutosave()
             if emojiArtboard.background != oldValue.background {
                 fetchBackgroundImageDataIfNecessary()
             }
@@ -22,53 +43,10 @@ class EmojiArtboardViewModel: ObservableObject {
     @Published var backgroundImage: UIImage?
     @Published var backgroundImageFetchStatus = BackgroundImageFetchStatus.idle
     
-    private var autosaveTimer: Timer?
-    
-    private func scheduleAutosave() {
-        autosaveTimer?.invalidate()
-        autosaveTimer = Timer.scheduledTimer(withTimeInterval: Autosave.coalescingInterval, repeats: false) { _ in
-            self.autosave()
-        }
-    }
-    
-    private struct Autosave {
-        static let coalescingInterval = 5.0
-        static let filename = "Autosaved.emojiArtboard"
-        static var url: URL? {
-            let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-            return documentDirectory?.appendingPathComponent(filename)
-        }
-    }
-    
-    private func autosave() {
-        if let url = Autosave.url {
-            save(to: url)
-        }
-    }
-    
-    private func save(to url: URL) {
-        let thisFunction = "\(String(describing: self)).\(#function)"
-        do {
-            let data: Data = try emojiArtboard.json()
-            print("\(thisFunction) JSON = \(String(data: data, encoding: .utf8) ?? "nil")")
-            try data.write(to: url)
-            print("\(thisFunction) success!")
-        } catch let encodingError where encodingError is EncodingError {
-            print("\(thisFunction) couldn't encode EmojiArtboard as JSON because = \(encodingError.localizedDescription)")
-
-        } catch let error {
-            print("\(thisFunction) error = \(error)")
-        }
-    }
     
     init() {
-        if let url = Autosave.url, let autosavedEmojiArtboard = try? EmojiArtboardModel(url: url) {
-            emojiArtboard = autosavedEmojiArtboard
-            fetchBackgroundImageDataIfNecessary()
-        } else {
             emojiArtboard = EmojiArtboardModel()
-            setBackground(.url(URL(string: "https://blog.hootsuite.com/wp-content/uploads/2020/02/Image-copyright.png")!))
-        }
+        setBackground(.url(URL(string: "https://blog.hootsuite.com/wp-content/uploads/2020/02/Image-copyright.png")!))
     }
     
     var emojis: [Emoji] { emojiArtboard.emojis}
