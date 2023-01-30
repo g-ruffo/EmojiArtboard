@@ -42,6 +42,21 @@ struct AnimatedActionButton: View {
 struct IdentifiableAlert: Identifiable {
     var id: String
     var alert: () -> Alert
+    
+    init(id: String, alert: @escaping () -> Alert) {
+        self.id = id
+        self.alert = alert
+    }
+    
+    init(id: String, title: String, message: String) {
+        self.id = id
+        alert = { Alert(title: Text(title), message: Text(message), dismissButton: .default(Text("OK"))) }
+    }
+    
+    init(title: String, message: String) {
+        self.id = title + message
+        alert = { Alert(title: Text(title), message: Text(message), dismissButton: .default(Text("OK"))) }
+    }
 }
 
 struct UndoButton: View {
@@ -87,5 +102,30 @@ struct UndoButton: View {
     }
 }
 
+
+struct CompactableIntoContextMenu: ViewModifier {
+    // Return a single context menu button
+    #if os(iOS)
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    var compact: Bool { horizontalSizeClass == .compact }
+    #else
+    let compact = false
+    #endif
+    
+    func body(content: Content) -> some View {
+        if compact {
+            Button {
+                
+            } label: {
+                Image(systemName: "ellipsis.circle")
+            }
+            .contextMenu {
+                content
+            }
+        } else {
+            content
+        }
+    }
+}
 
 

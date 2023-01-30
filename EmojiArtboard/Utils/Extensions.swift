@@ -227,5 +227,12 @@ extension View {
             self
         }
     }
+}
 
+extension View {
+    func compactableToolbar<Content>(@ViewBuilder content: () -> Content) -> some View where Content: View {
+        self.toolbar {
+            content().modifier(CompactableIntoContextMenu())
+        }
+    }
 }
