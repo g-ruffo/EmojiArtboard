@@ -189,3 +189,13 @@ extension RawRepresentable where Self: Codable {
 extension UTType {
     static let emojiartboard = UTType(exportedAs: "ca.veltus.emojiartboard")
 }
+
+
+extension UndoManager {
+    var optionalUndoMenuItemTitle: String? {
+        canUndo ? undoMenuItemTitle : nil
+    }
+    var optionalRedoMenuItemTitle: String? {
+        canRedo ? redoMenuItemTitle : nil
+    }
+}
