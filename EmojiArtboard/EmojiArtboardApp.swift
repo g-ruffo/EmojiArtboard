@@ -11,6 +11,7 @@ import SwiftUI
 struct EmojiArtboardApp: App {
     @StateObject var emojiArtboardViewModel = EmojiArtboardViewModel()
     @StateObject var paletteStoreViewModel = PaletteStoreViewModel(named: "Default")
+    
     var body: some Scene {
         WindowGroup {
             EmojiArtboardScreen(viewModel: emojiArtboardViewModel)

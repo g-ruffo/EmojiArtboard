@@ -69,13 +69,18 @@ struct EmojiArtboardScreen: View {
                 }
             }
             .onReceive(viewModel.$backgroundImage) { image in
-                zoomToFit(image, in: geometry.size)
+                if autozoom {
+                    zoomToFit(image, in: geometry.size)
+
+                }
             }
             
         }
     }
     
     @State private var alertToShow: IdentifiableAlert?
+    
+    @State private var autozoom = false
     
     private func showBackgroundImageFetchAlert(_ url: URL) {
         alertToShow = IdentifiableAlert(id: "Fetch failed: " + url.absoluteString, alert: {
@@ -88,12 +93,14 @@ struct EmojiArtboardScreen: View {
     
     private func drop(providers: [NSItemProvider], at location: CGPoint, in geometry: GeometryProxy) -> Bool {
         var found = providers.loadObjects(ofType: URL.self) { url in
+            autozoom = true
             viewModel.setBackground(.url(url.imageURL))
         }
         
         if !found {
             found = providers.loadObjects(ofType: UIImage.self) { image in
                 if let data = image.jpegData(compressionQuality: 1.0) {
+                    autozoom = true
                     viewModel.setBackground(.imageData(data))
                 }
             }
@@ -140,12 +147,12 @@ struct EmojiArtboardScreen: View {
         CGFloat(emoji.size)
     }
     
-    @State private var steadyStateZoomScale: CGFloat = 1
+    @SceneStorage("EmojiArtboardScreen.steadyStateZoomScale") private var steadyStateZoomScale: CGFloat = 1
     @GestureState private var gestureZoomScale: CGFloat = 1
     
     @GestureState private var gestureEmojiPanOffset: CGSize = CGSize.zero
     
-    @State private var steadyStatePanOffset: CGSize = CGSize.zero
+    @SceneStorage("EmojiArtboardScreen.steadyStatePanOffset") private var steadyStatePanOffset: CGSize = CGSize.zero
     @GestureState private var gesturePanOffset: CGSize = CGSize.zero
     
     private var panOffset: CGSize {
