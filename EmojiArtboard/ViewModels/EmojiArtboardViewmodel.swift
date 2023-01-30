@@ -46,7 +46,7 @@ class EmojiArtboardViewModel: ReferenceFileDocument {
     
     init() {
             emojiArtboard = EmojiArtboardModel()
-        setBackground(.url(URL(string: "https://blog.hootsuite.com/wp-content/uploads/2020/02/Image-copyright.png")!))
+        setBackground(.url(URL(string: "https://blog.hootsuite.com/wp-content/uploads/2020/02/Image-copyright.png")!), undoManager: nil)
     }
     
     var emojis: [Emoji] { emojiArtboard.emojis}
@@ -75,53 +75,62 @@ class EmojiArtboardViewModel: ReferenceFileDocument {
                     self?.backgroundImage = image
                     self?.backgroundImageFetchStatus = (image != nil) ? .idle : .failed(url)
                 }
-
-//            DispatchQueue.global(qos: .userInitiated).async {
-//                let imageData = try? Data(contentsOf: url)
-//                DispatchQueue.main.async { [weak self] in
-//                    if self?.emojiArtboard.background == EmojiArtboardModel.Background.url(url) {
-//                        self?.backgroundImageFetchStatus = .idle
-//                        if imageData != nil {
-//                            self?.backgroundImage = UIImage(data: imageData!)
-//                        }
-//                        if self?.backgroundImage == nil {
-//                            self?.backgroundImageFetchStatus = .failed(url)
-//                        }
-//                    }
-//                }
-//            }
         case .imageData(let data): backgroundImage = UIImage(data: data)
         case .blank: break
             
         }
     }
     
-    func setBackground(_ background: EmojiArtboardModel.Background) {
-        emojiArtboard.background = background
-        print("background set to \(background)")
-    }
-    
-    func addEmoji(_ emoji: String, at location: (x: Int, y: Int), size: CGFloat) {
-        emojiArtboard.addEmoji(emoji, at: location, size: Int(size))
-    }
-    
-    func moveEmoji(_ emoji: Emoji, by offset: CGSize) {
-        if let index = emojiArtboard.emojis.index(matching: emoji) {
-            emojiArtboard.emojis[index].x += Int(offset.width)
-            emojiArtboard.emojis[index].y += Int(offset.height)
-            
+    func setBackground(_ background: EmojiArtboardModel.Background, undoManager: UndoManager?) {
+        undoablePerform(operation: "Set Background", with: undoManager) {
+            emojiArtboard.background = background
+            print("background set to \(background)")
         }
     }
     
-    func scaleEmoji(_ emoji: Emoji, by scale: CGFloat) {
-        if let index = emojiArtboard.emojis.index(matching: emoji) {
-            emojiArtboard.emojis[index].size = Int((CGFloat(emojiArtboard.emojis[index].size) * scale).rounded(.toNearestOrAwayFromZero))
+    func addEmoji(_ emoji: String, at location: (x: Int, y: Int), size: CGFloat, undoManager: UndoManager?) {
+        undoablePerform(operation: "Add \(emoji)", with: undoManager) {
+            emojiArtboard.addEmoji(emoji, at: location, size: Int(size))
         }
     }
     
-    func removeEmoji(_ emoji: Emoji) {
+    func moveEmoji(_ emoji: Emoji, by offset: CGSize, undoManager: UndoManager?) {
         if let index = emojiArtboard.emojis.index(matching: emoji) {
-            emojiArtboard.emojis.remove(at: index)
+            undoablePerform(operation: "Move", with: undoManager) {
+                emojiArtboard.emojis[index].x += Int(offset.width)
+                emojiArtboard.emojis[index].y += Int(offset.height)
+            }
         }
     }
+    
+    func scaleEmoji(_ emoji: Emoji, by scale: CGFloat, undoManager: UndoManager?) {
+        if let index = emojiArtboard.emojis.index(matching: emoji) {
+            undoablePerform(operation: "Scale", with: undoManager) {
+                emojiArtboard.emojis[index].size = Int((CGFloat(emojiArtboard.emojis[index].size) * scale).rounded(.toNearestOrAwayFromZero))
+            }
+        }
+    }
+    
+    func removeEmoji(_ emoji: Emoji, undoManager: UndoManager?) {
+        if let index = emojiArtboard.emojis.index(matching: emoji) {
+            undoablePerform(operation: "Remove", with: undoManager) {
+                emojiArtboard.emojis.remove(at: index)
+            }
+        }
+    }
+    
+    // MARK: Undo
+
+    private func undoablePerform(operation: String, with undoManager: UndoManager? = nil, doit: () -> Void ) {
+        let oldEmojiArtboard = emojiArtboard
+        doit()
+        undoManager?.registerUndo(withTarget: self) { myself in
+            myself.undoablePerform(operation: operation, with: undoManager) {
+                myself.emojiArtboard = oldEmojiArtboard
+            }
+        }
+        undoManager?.setActionName(operation)
+    }
+
 }
+

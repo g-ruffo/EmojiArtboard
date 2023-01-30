@@ -10,6 +10,8 @@ import SwiftUI
 struct EmojiArtboardScreen: View {
     @ObservedObject var viewModel: EmojiArtboardViewModel
     
+    @Environment(\.undoManager) var undoManager
+    
     let defaultEmojiFontSize: CGFloat = 40
     
     var body: some View {
@@ -94,14 +96,14 @@ struct EmojiArtboardScreen: View {
     private func drop(providers: [NSItemProvider], at location: CGPoint, in geometry: GeometryProxy) -> Bool {
         var found = providers.loadObjects(ofType: URL.self) { url in
             autozoom = true
-            viewModel.setBackground(.url(url.imageURL))
+            viewModel.setBackground(.url(url.imageURL), undoManager: undoManager)
         }
         
         if !found {
             found = providers.loadObjects(ofType: UIImage.self) { image in
                 if let data = image.jpegData(compressionQuality: 1.0) {
                     autozoom = true
-                    viewModel.setBackground(.imageData(data))
+                    viewModel.setBackground(.imageData(data), undoManager: undoManager)
                 }
             }
         }
@@ -111,7 +113,8 @@ struct EmojiArtboardScreen: View {
                     viewModel.addEmoji(
                         String(emoji),
                         at: convertToEmojiCoordinates(location, in: geometry),
-                        size: defaultEmojiFontSize / zoomScale
+                        size: defaultEmojiFontSize / zoomScale,
+                        undoManager: undoManager
                     )
                 }
             }
@@ -185,7 +188,7 @@ struct EmojiArtboardScreen: View {
             }
             .onEnded { finalDragGestureValue in
                 for emoji in selectedEmojis {
-                    viewModel.moveEmoji(emoji, by: finalDragGestureValue.distance / zoomScale)
+                    viewModel.moveEmoji(emoji, by: finalDragGestureValue.distance / zoomScale, undoManager: undoManager)
                 }
             }
     }
@@ -201,7 +204,7 @@ struct EmojiArtboardScreen: View {
                     steadyStateZoomScale *= gestureScaleAtEnd
                 } else {
                     for emoji in selectedEmojis {
-                        viewModel.scaleEmoji(emoji, by: gestureScaleAtEnd)
+                        viewModel.scaleEmoji(emoji, by: gestureScaleAtEnd, undoManager: undoManager)
                     }
                 }
             }
@@ -266,7 +269,7 @@ struct EmojiArtboardScreen: View {
     private func deleteEmojiOnDemand(for emoji: Emoji) -> some View {
         Button(role: .destructive) {
             if selectedEmojis.contains(emoji) { selectedEmojisId.remove(emoji.id) }
-            viewModel.removeEmoji(emoji)
+            viewModel.removeEmoji(emoji, undoManager: undoManager)
         } label: { Text("Yes") }
     }
     
