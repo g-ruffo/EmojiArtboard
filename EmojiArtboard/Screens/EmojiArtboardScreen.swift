@@ -73,14 +73,27 @@ struct EmojiArtboardScreen: View {
             .onReceive(viewModel.$backgroundImage) { image in
                 if autozoom {
                     zoomToFit(image, in: geometry.size)
-
+                    
                 }
             }
-            .toolbar {
-                UndoButton(
-                    undo: undoManager?.optionalUndoMenuItemTitle,
-                    redo: undoManager?.optionalUndoMenuItemTitle
-                )
+            .compactableToolbar {
+                AnimatedActionButton(title: "Paste Background", systemImage: "doc.on.clipboard") {
+                    pasteBackground()
+                }
+
+                if let undoManager = undoManager {
+                    if undoManager.canUndo {
+                        AnimatedActionButton(title: undoManager.undoActionName, systemImage: "arrow.uturn.backward") {
+                            undoManager.undo()
+                        }
+                    }
+                    
+                    if undoManager.canRedo {
+                        AnimatedActionButton(title: undoManager.redoActionName, systemImage: "arrow.uturn.forward") {
+                            undoManager.redo()
+                        }
+                    }
+                }
             }
         }
     }
@@ -89,12 +102,25 @@ struct EmojiArtboardScreen: View {
     
     @State private var autozoom = false
     
+    private func pasteBackground() {
+        if let imageData = UIPasteboard.general.image?.jpegData(compressionQuality: 1.0) {
+            viewModel.setBackground(.imageData(imageData), undoManager: undoManager)
+        } else if let url = UIPasteboard.general.url?.imageURL {
+            viewModel.setBackground(.url(url), undoManager: undoManager)
+        } else {
+            alertToShow = IdentifiableAlert(
+                title: "Paste Background",
+                message: "There is no image currently on the pasteboard"
+                )
+        }
+        
+    }
     private func showBackgroundImageFetchAlert(_ url: URL) {
         alertToShow = IdentifiableAlert(id: "Fetch failed: " + url.absoluteString, alert: {
             Alert(title: Text("Background Image Fetch"),
-            message: Text("Couldn't load image from \(url)."),
+                  message: Text("Couldn't load image from \(url)."),
                   dismissButton: .default(Text("OK"))
-                  )
+            )
         })
     }
     
@@ -287,7 +313,7 @@ struct EmojiArtboardScreen: View {
             }
     }
 }
-    
+
 
 struct EmojiArtboardView_Previews: PreviewProvider {
     static var previews: some View {
