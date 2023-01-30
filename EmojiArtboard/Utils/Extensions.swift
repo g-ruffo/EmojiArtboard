@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 extension Collection where Element: Identifiable {
     func index(matching element: Element) -> Self.Index? {
@@ -183,4 +184,8 @@ extension RawRepresentable where Self: Codable {
             return nil
         }
     }
+}
+
+extension UTType {
+    static let emojiartboard = UTType(exportedAs: "ca.veltus.emojiartboard")
 }
